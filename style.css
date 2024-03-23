@@ -1,0 +1,82 @@
+/* CSS reset */
+
+body, ul, h1, h2, h3, h4, h5 {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+}
+
+ul {
+	list-style: none;
+}
+
+/* CSS initialization */
+
+:root {
+    --colour-light-navy: #496989;
+    --colour-teal: #58A399;
+    --colour-light-green: #A8CD9F;
+    --colour-greenish-yellow: #E2F4C5;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+  
+    & .tooltip-text {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+  }
+}
+  
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+}
+
+/* App Header */
+
+#app-title {
+    text-align: center;
+    padding: 10px 0;
+    & > h1 {
+        margin: 0 10px;
+        display: inline;
+    }
+}
+
+/*  Rak-rak Buku */
+
+.rak-container {
+    border: 5px solid var(--colour-light-navy);
+    border-radius: 1em;
+    margin: 1em;
+    padding: 1em;
+
+    & > .rak-title{
+        margin-bottom: 1em;
+    }
+}
+
+.rak-buku {
+    & ul > li {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+}
