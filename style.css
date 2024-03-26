@@ -19,6 +19,7 @@ ul {
     --colour-light-navy: #496989;
     --colour-teal: #58A399;
     --colour-light-green: #A8CD9F;
+    --colour-dark-green: #5d6e58;
     --colour-greenish-yellow: #E2F4C5;
 }
 
@@ -72,6 +73,102 @@ body {
         font-family: 'Times New Roman', Times, serif;
         margin: 0 10px;
         display: inline;
+    }
+}
+
+/* Input forms */
+
+.form-container {
+
+    width: 100%;
+    max-width: 400px;
+    border-radius: 15px;
+    border: none;
+
+    &::backdrop {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    & h2 {
+        margin: 1em 0;
+    }
+
+    /* inputs */
+
+    & form > .input-container {
+        display: flex;
+        flex-flow: column;
+        margin: 0.5em 0;
+
+        & > label {
+            font-weight: bold;
+        }
+        & > input {
+
+            border-radius: 5px;
+            border: 2px solid black;
+            
+            &:focus {
+                background-color: var(--colour-greenish-yellow);
+            }
+            &:valid {
+                background-color: var(--colour-greenish-yellow);
+            }
+        }
+    }
+
+    & form > .input-check-container {
+        margin: 0.5em 0;
+
+        & > label {
+            font-weight: bold;
+        }
+    }
+
+    button[type=submit] {
+        border-radius: 5px;
+        border: none;
+        padding: 5px;
+        background-color: var(--colour-teal);
+        color: white;
+    }
+
+    /* The Close Button */
+
+    & .hide {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+      
+    & .hide:hover,
+      .hide:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+      }   
+}
+
+/* Show form modal buttons */
+
+.button-container {
+    padding: 1em;
+    display: flex;
+    justify-content:space-evenly;
+
+    & > button {
+        background-color: var(--colour-greenish-yellow);
+        padding: 5px 15px;
+        border: none;
+        border-radius: 15px;
+        font-weight: bold;
+        font-size: 1.3em;
+    }
+    & > button:hover {
+        background-color: var(--colour-dark-green);
+        color: var(--colour-greenish-yellow);
+        cursor: pointer;
     }
 }
 
@@ -152,13 +249,4 @@ body {
     & .book-buttons > button:hover {
         cursor: pointer;
     }
-}
-
-
-
-.button-container {
-    background-color: var(--colour-light-navy);
-    padding: 1em;
-    display: flex;
-    justify-content:space-evenly;
 }

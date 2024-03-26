@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <meta charset="UTF-8">
@@ -9,6 +9,9 @@
 </head>
 
 <body>
+
+    <!-- App Title -->
+
     <header>
         <div id="app-title">
             <svg width="1.6em" height="1.6em" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="logo" viewBox="0 0 16 16">
@@ -16,12 +19,16 @@
             </svg>
             <h1>Library App</h1>
         </div>
-
     </header>
+
     <main>
-        <dialog class="form-container">
+
+        <!-- Create Book Modal -->
+
+        <dialog id="simpan-buku" class="form-container">
+            <span class="hide hide-simpan-buku">&times;</span>
+            <h2>Simpan buku baru</h2>
             <form action="" method="dialog">
-                <h2>Simpan buku baru</h2>
                 <div class="input-container">
                     <label for="title">Judul</label>
                     <input required type="text" name="title" id="title">
@@ -34,22 +41,49 @@
                     <label for="year">Tahun</label>
                     <input required type="number" name="year" id="year">
                 </div>
-                <div class="input-container">
+                <div class="input-check-container">
                     <label for="is-complete">Selesai dibaca</label>
                     <input type="checkbox" name="isComplete" id="is-complete">
                 </div>
                 <button type="submit">Simpan</button>
             </form>
         </dialog>
-        <dialog class="form-container">
+
+        <!-- Search Book Modal -->
+        
+        <dialog id="cari-buku" class="form-container">
+            <span class="hide hide-cari-buku">&times;</span>
+            <h2>
+                <label for="search">Cari buku</label>
+            </h2>
             <form action="" method="dialog">
-                <h2>
-                    <label for="search">Cari buku</label>
-                </h2>
                 <input type="text" name="search" id="search">
                 <button type="submit">Cari</button>
             </form>
         </dialog>
+
+        <!-- Open Modals Buttons -->
+
+        <div class="button-container">
+            <button class="show-simpan-buku">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                    <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z"/>
+                </svg>
+                <span>
+                    Simpan buku
+                </span>
+            </button>
+            <button class="show-cari-buku">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                </svg>
+                Cari buku
+            </button>
+        </div>
+
+        <!-- "Belum selesai dibaca" Section -->
+
         <section id="rak-belum-selesai-dibaca" class="rak-container">
             <div class="rak-title">
                 <h2>Belum selesai dibaca</h2>
@@ -291,6 +325,9 @@
                 </ul>
             </div>
         </section>
+
+        <!-- "Selesai dibaca" Section -->
+
         <section id="rak-selesai-dibaca" class="rak-container">
             <div class="rak-title">
                 <h2>Selesai dibaca</h2>
@@ -330,24 +367,9 @@
             </div>
         </section>
     </main>
-    <footer>
-        <div class="button-container">
-            <button class="show-simpan-buku">
-                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
-                    <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z"/>
-                </svg>
-                Simpan buku
-            </button>
-            <button class="show-cari-buku">
-                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                </svg>
-                Cari buku
-            </button>
-        </div>
-    </footer>
+
     <script src="./script.js"></script>
+
 </body>
 
 </html>
