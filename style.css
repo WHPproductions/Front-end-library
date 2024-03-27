@@ -70,7 +70,6 @@ body {
     text-shadow: 3px 3px 2px black;
 
     & > h1 {
-        font-family: 'Times New Roman', Times, serif;
         margin: 0 10px;
         display: inline;
     }
@@ -174,7 +173,13 @@ body {
 
 /*  Rak-rak Buku */
 
+#rak-rak-buku-container {
+    display: flex;
+    flex-flow: column;
+}
+
 .rak-container {
+    flex-basis: 100%;
     border: 5px solid var(--colour-light-navy);
     border-radius: 1em;
     margin: 1em;
@@ -238,6 +243,12 @@ body {
         font-style: italic;
     }
 
+    /* Rak buku buttons */
+
+    & .book-buttons {
+        margin-left: auto;
+    }
+
     & .book-buttons > button {
         width: 35px;
         height: 35px;
@@ -250,3 +261,13 @@ body {
         cursor: pointer;
     }
 }
+
+/* Media queries for Desktop */
+
+@media only screen and (min-width: 768px) {
+
+    #rak-rak-buku-container {
+        flex-flow: row;
+    }
+
+  }
