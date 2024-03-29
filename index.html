@@ -34,7 +34,7 @@
       <dialog id="simpan-buku" class="form-container" aria-modal="true">
         <span class="hide hide-simpan-buku">&times;</span>
         <h2>Simpan buku baru</h2>
-        <form action="" method="dialog">
+        <form method="dialog">
           <div class="input-container">
             <label for="title">Judul</label>
             <input required type="text" name="title" id="title" />
@@ -62,9 +62,33 @@
         <h2>
           <label for="search">Cari buku</label>
         </h2>
-        <form action="" method="dialog">
+        <form method="dialog">
           <input type="text" name="search" id="search" />
           <button type="submit">Cari</button>
+        </form>
+      </dialog>
+
+      <!-- Edit Book Modal -->
+
+      <dialog id="sunting-buku" class="form-container" aria-modal="true">
+        <h2>
+          Sunting buku ini
+        </h2>
+        <form method="dialog">
+          <div class="input-container">
+            <label for="title-edit">Judul</label>
+            <input required type="text" name="title" id="title-edit" />
+          </div>
+          <div class="input-container">
+            <label for="author-edit">Penulis</label>
+            <input required type="text" name="author" id="author-edit" />
+          </div>
+          <div class="input-container">
+            <label for="year-edit">Tahun</label>
+            <input required type="number" name="year" id="year-edit" />
+          </div>
+          <button type="button" id="edit-yes">Submit</button>
+          <button type="button" id="edit-no">Cancel</button>
         </form>
       </dialog>
 
@@ -76,11 +100,11 @@
             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
             <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/>
           </svg>
-          Delete this book?
+          Hapus buku ini?
         </h2>
         <div class="danger-modal-buttons">
-          <button type="button" id="delete-yes" class="danger-button">Yes</button>
-          <button type="button" id="delete-no">No</button>
+          <button type="button" id="delete-yes" class="danger-button">Ya</button>
+          <button type="button" id="delete-no">Tidak</button>
         </div>
       </dialog>
       

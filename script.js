@@ -16,7 +16,6 @@ const library = localStorage.getItem(LIBRARY_LOCAL_STORAGE_KEY)
 // Rak buku render
 
 function rakRakBukuRender(libraryArray) {
-
   const rakBelumSelesaiDibaca = document.querySelector(
     "#rak-belum-selesai-dibaca .rak-buku > ul"
   );
@@ -25,8 +24,8 @@ function rakRakBukuRender(libraryArray) {
   );
 
   if (libraryArray.length === 0) {
-    rakBelumSelesaiDibaca.innerHTML = '';
-    rakSelesaiDibaca.innerHTML='';
+    rakBelumSelesaiDibaca.innerHTML = "";
+    rakSelesaiDibaca.innerHTML = "";
   }
 
   let unreadListHTMLString = "";
@@ -171,57 +170,104 @@ function rakRakBukuRender(libraryArray) {
     rakSelesaiDibaca.innerHTML = readListHTMLString;
   }
 
-  const deleteButtons = document.querySelectorAll('.book-buttons > .delete');
-  const unreadButtons = document.querySelectorAll('.book-buttons > .check-read');
-  const readButtons = document.querySelectorAll('.book-buttons > .check-unread');
+  const deleteButtons = document.querySelectorAll(".book-buttons > .delete");
+  const editButtons = document.querySelectorAll(".book-buttons > .edit");
+  const unreadButtons = document.querySelectorAll(
+    ".book-buttons > .check-read"
+  );
+  const readButtons = document.querySelectorAll(
+    ".book-buttons > .check-unread"
+  );
 
   deleteButtons.forEach((button) => {
-    const id = button.getAttribute('data-id')
+    const id = button.getAttribute("data-id");
 
-    button.addEventListener('click', () => {
+    button.addEventListener("click", () => {
       const dangerModal = document.getElementById("danger-modal");
       const deleteYesButton = document.getElementById("delete-yes");
       const deleteNoButton = document.getElementById("delete-no");
 
       dangerModal.showModal();
-      
-      function yesEventHandler () {
-        removeBook(library, LIBRARY_LOCAL_STORAGE_KEY, id)
-        deleteYesButton.removeEventListener('click', yesEventHandler)
-        dangerModal.close()
+
+      function yesEventHandler() {
+        removeBook(library, LIBRARY_LOCAL_STORAGE_KEY, id);
+        deleteYesButton.removeEventListener("click", yesEventHandler);
+        dangerModal.close();
       }
 
-      function noEventHandler () {
-        deleteYesButton.removeEventListener('click', yesEventHandler)
-        dangerModal.close()
+      function noEventHandler() {
+        deleteYesButton.removeEventListener("click", yesEventHandler);
+        dangerModal.close();
       }
 
-      deleteYesButton.addEventListener('click', yesEventHandler)
-      deleteNoButton.addEventListener('click', noEventHandler)
-    })
-  })
+      deleteYesButton.addEventListener("click", yesEventHandler);
+      deleteNoButton.addEventListener("click", noEventHandler);
+    });
+  });
 
-  unreadButtons.forEach(button => {
-    const id = button.getAttribute('data-id')
+  editButtons.forEach((button) => {
+    const id = button.getAttribute("data-id");
+    const bookReference = findBook(library, id);
 
-    button.addEventListener('click', () => {
-      toggleCompleteBook(library, LIBRARY_LOCAL_STORAGE_KEY, id)
-    })
-  })
-  
-  readButtons.forEach(button => {
-    const id = button.getAttribute('data-id')
-    
-    button.addEventListener('click', () => {
-      toggleCompleteBook(library, LIBRARY_LOCAL_STORAGE_KEY, id)
-    })
-  })
+    button.addEventListener("click", () => {
+      const editModal = document.getElementById("sunting-buku");
+      const editYesButton = document.getElementById("edit-yes");
+      const editNoButton = document.getElementById("edit-no");
 
+      // Edit inputs
+      const titleInput = document.getElementById("title-edit");
+      const authorInput = document.getElementById("author-edit");
+      const yearInput = document.getElementById("year-edit");
+
+      editModal.showModal();
+      titleInput.value = bookReference.title;
+      authorInput.value = bookReference.author;
+      yearInput.value = bookReference.year;
+
+      function yesEventHandler() {
+        editBook(
+          library,
+          LIBRARY_LOCAL_STORAGE_KEY,
+          id,
+          titleInput.value,
+          authorInput.value,
+          yearInput.value,
+          bookReference.isComplete
+        );
+        editYesButton.removeEventListener("click", yesEventHandler);
+        editModal.close();
+      }
+
+      function noEventHandler() {
+        editYesButton.removeEventListener("click", yesEventHandler);
+        editModal.close();
+      }
+
+      editYesButton.addEventListener("click", yesEventHandler);
+      editNoButton.addEventListener("click", noEventHandler);
+    });
+  });
+
+  unreadButtons.forEach((button) => {
+    const id = button.getAttribute("data-id");
+
+    button.addEventListener("click", () => {
+      toggleCompleteBook(library, LIBRARY_LOCAL_STORAGE_KEY, id);
+    });
+  });
+
+  readButtons.forEach((button) => {
+    const id = button.getAttribute("data-id");
+
+    button.addEventListener("click", () => {
+      toggleCompleteBook(library, LIBRARY_LOCAL_STORAGE_KEY, id);
+    });
+  });
 }
 
 document.addEventListener("DOMContentLoaded", (event) => {
   //Rak buku first render initialization
-  
+
   rakRakBukuRender(library);
 });
 
@@ -277,24 +323,59 @@ formModal.addEventListener("submit", () => {
   form.reset();
 });
 
+// Read a book
+
+function findBook(libraryArray, bookId) {
+  const findedBook = libraryArray.find((book) => book.id == bookId);
+
+  return findedBook === undefined ? undefined : findedBook;
+}
+
+// Update a book
+
+function editBook(
+  libraryArray,
+  localStorageKey,
+  bookId,
+  title,
+  author,
+  year,
+  isComplete
+) {
+  const bookArrayIndex = libraryArray.findIndex((book) => {
+    return book.id == bookId;
+  });
+  const editedBook = {
+    id: bookId,
+    title: title,
+    author: author,
+    year: year,
+    isComplete: isComplete,
+  };
+  libraryArray.splice(bookArrayIndex, 1, editedBook);
+  localStorage.setItem(localStorageKey, JSON.stringify(libraryArray));
+  rakRakBukuRender(libraryArray);
+}
+
 // Delete a book
 
 function removeBook(libraryArray, localStorageKey, bookId) {
   const bookArrayIndex = libraryArray.findIndex((book) => {
-    return book.id == bookId
+    return book.id == bookId;
   });
-  libraryArray.splice(bookArrayIndex, 1)
+  libraryArray.splice(bookArrayIndex, 1);
   localStorage.setItem(localStorageKey, JSON.stringify(libraryArray));
   rakRakBukuRender(libraryArray);
 }
 
 // Toggle read or unread a book
 
-function toggleCompleteBook (libraryArray, localStorageKey, bookId) {
+function toggleCompleteBook(libraryArray, localStorageKey, bookId) {
   const bookArrayIndex = libraryArray.findIndex((book) => {
-    return book.id == bookId
+    return book.id == bookId;
   });
-  libraryArray[bookArrayIndex].isComplete = !libraryArray[bookArrayIndex].isComplete
+  libraryArray[bookArrayIndex].isComplete =
+    !libraryArray[bookArrayIndex].isComplete;
   localStorage.setItem(localStorageKey, JSON.stringify(libraryArray));
   rakRakBukuRender(libraryArray);
 }
