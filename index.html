@@ -63,7 +63,15 @@
           <label for="search">Cari buku</label>
         </h2>
         <form method="dialog">
-          <input type="text" name="search" id="search" />
+          <div>
+            <input type="text" name="search" id="search" />
+            <select name="search-type" id="search-type">
+              <option value="title">Judul</option>
+              <option value="author">Penulis</option>
+              <option value="year">Tahun</option>
+            </select>
+          </div>
+          <br>
           <button type="submit">Cari</button>
         </form>
       </dialog>
@@ -143,6 +151,8 @@
           Cari buku
         </button>
       </div>
+
+      <!-- Rak Buku -->
 
       <div id="rak-rak-buku-container">
         <!-- "Belum selesai dibaca" Section -->

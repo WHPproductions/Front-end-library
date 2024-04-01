@@ -1,6 +1,6 @@
 class Book {
-  constructor(title, author, year, isComplete) {
-    this.id = +new Date();
+  constructor(title, author, year, isComplete, id = +new Date()) {
+    this.id = id;
     this.title = title;
     this.author = author;
     this.year = year;
@@ -265,36 +265,6 @@ function rakRakBukuRender(libraryArray) {
   });
 }
 
-document.addEventListener("DOMContentLoaded", (event) => {
-  //Rak buku first render initialization
-
-  rakRakBukuRender(library);
-});
-
-// Showing and closing modals
-
-const showFormModalButton = document.querySelector(".show-simpan-buku");
-const showSearchModalButton = document.querySelector(".show-cari-buku");
-const formModal = document.getElementById("simpan-buku");
-const searchModal = document.getElementById("cari-buku");
-const hideFormModalButton = document.querySelector(".hide-simpan-buku");
-const hideSearchModalButton = document.querySelector(".hide-cari-buku");
-
-showFormModalButton.addEventListener("click", () => {
-  formModal.showModal();
-});
-
-showSearchModalButton.addEventListener("click", () => {
-  searchModal.showModal();
-});
-
-hideFormModalButton.addEventListener("click", () => {
-  formModal.close();
-});
-
-hideSearchModalButton.addEventListener("click", () => {
-  searchModal.close();
-});
 
 // Create new book
 
@@ -303,25 +273,6 @@ function addBook(libraryArray, localStorageKey, book) {
   localStorage.setItem(localStorageKey, JSON.stringify(libraryArray));
   rakRakBukuRender(libraryArray);
 }
-
-formModal.addEventListener("submit", () => {
-  const titleInput = document.getElementById("title");
-  const authorInput = document.getElementById("author");
-  const yearInput = document.getElementById("year");
-  const isCompleteInput = document.getElementById("is-complete");
-  const form = document.querySelector("#simpan-buku form");
-
-  const newBook = new Book(
-    titleInput.value,
-    authorInput.value,
-    yearInput.value,
-    isCompleteInput.checked
-  );
-
-  addBook(library, LIBRARY_LOCAL_STORAGE_KEY, newBook);
-
-  form.reset();
-});
 
 // Read a book
 
@@ -345,13 +296,7 @@ function editBook(
   const bookArrayIndex = libraryArray.findIndex((book) => {
     return book.id == bookId;
   });
-  const editedBook = {
-    id: bookId,
-    title: title,
-    author: author,
-    year: year,
-    isComplete: isComplete,
-  };
+  const editedBook = new Book(title, author, year, isComplete, bookId);
   libraryArray.splice(bookArrayIndex, 1, editedBook);
   localStorage.setItem(localStorageKey, JSON.stringify(libraryArray));
   rakRakBukuRender(libraryArray);
@@ -379,3 +324,79 @@ function toggleCompleteBook(libraryArray, localStorageKey, bookId) {
   localStorage.setItem(localStorageKey, JSON.stringify(libraryArray));
   rakRakBukuRender(libraryArray);
 }
+
+// Filter books from an array
+
+function filterBooks(libraryArray, key, keyType) {
+  if (key === "") return rakRakBukuRender(libraryArray);
+
+  const filteredBooks = libraryArray.filter((book) => {
+    return book[keyType] == key;
+  });
+
+  rakRakBukuRender(filteredBooks);
+}
+
+// App's initializations
+
+document.addEventListener("DOMContentLoaded", (event) => {
+  
+  //Rak buku first render initialization
+  rakRakBukuRender(library);
+
+  // Showing and closing modals
+
+  const showFormModalButton = document.querySelector(".show-simpan-buku");
+  const showSearchModalButton = document.querySelector(".show-cari-buku");
+  const formModal = document.getElementById("simpan-buku");
+  const searchModal = document.getElementById("cari-buku");
+  const hideFormModalButton = document.querySelector(".hide-simpan-buku");
+  const hideSearchModalButton = document.querySelector(".hide-cari-buku");
+
+  showFormModalButton.addEventListener("click", () => {
+    formModal.showModal();
+  });
+
+  showSearchModalButton.addEventListener("click", () => {
+    searchModal.showModal();
+  });
+
+  hideFormModalButton.addEventListener("click", () => {
+    formModal.close();
+  });
+
+  hideSearchModalButton.addEventListener("click", () => {
+    searchModal.close();
+  });
+
+  // Form event handlers
+
+  formModal.addEventListener("submit", () => {
+    const titleInput = document.getElementById("title");
+    const authorInput = document.getElementById("author");
+    const yearInput = document.getElementById("year");
+    const isCompleteInput = document.getElementById("is-complete");
+    const form = document.querySelector("#simpan-buku form");
+
+    const newBook = new Book(
+      titleInput.value,
+      authorInput.value,
+      yearInput.value,
+      isCompleteInput.checked
+    );
+
+    addBook(library, LIBRARY_LOCAL_STORAGE_KEY, newBook);
+
+    form.reset();
+  });
+
+  searchModal.addEventListener("submit", () => {
+    const searchInput = document.getElementById("search");
+    const searchTypeInput = document.getElementById("search-type");
+    const form = document.querySelector("#cari-buku form");
+
+    filterBooks(library, searchInput.value, searchTypeInput.value);
+
+    form.reset();
+  });
+});
