@@ -71,7 +71,7 @@
               <option value="year">Tahun</option>
             </select>
           </div>
-          <br>
+          <br />
           <button type="submit">Cari</button>
         </form>
       </dialog>
@@ -79,9 +79,7 @@
       <!-- Edit Book Modal -->
 
       <dialog id="sunting-buku" class="form-container" aria-modal="true">
-        <h2>
-          Sunting buku ini
-        </h2>
+        <h2>Sunting buku ini</h2>
         <form method="dialog">
           <div class="input-container">
             <label for="title-edit">Judul</label>
@@ -102,20 +100,38 @@
 
       <!-- Danger Modal -->
 
-      <dialog id="danger-modal" class="form-container" role="alertdialog" aria-modal="true">
+      <dialog
+        id="danger-modal"
+        class="form-container"
+        role="alertdialog"
+        aria-modal="true"
+      >
         <h2>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
-            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-            <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-exclamation-circle"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"
+            />
+            <path
+              d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"
+            />
           </svg>
           Hapus buku ini?
         </h2>
         <div class="danger-modal-buttons">
-          <button type="button" id="delete-yes" class="danger-button">Ya</button>
+          <button type="button" id="delete-yes" class="danger-button">
+            Ya
+          </button>
           <button type="button" id="delete-no">Tidak</button>
         </div>
       </dialog>
-      
+
       <!-- Open Modals Buttons -->
 
       <div class="button-container">

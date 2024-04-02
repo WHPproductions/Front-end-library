@@ -170,6 +170,8 @@ function rakRakBukuRender(libraryArray) {
     rakSelesaiDibaca.innerHTML = readListHTMLString;
   }
 
+  // Adding event handlers to every book buttons
+
   const deleteButtons = document.querySelectorAll(".book-buttons > .delete");
   const editButtons = document.querySelectorAll(".book-buttons > .edit");
   const unreadButtons = document.querySelectorAll(
@@ -214,7 +216,6 @@ function rakRakBukuRender(libraryArray) {
       const editYesButton = document.getElementById("edit-yes");
       const editNoButton = document.getElementById("edit-no");
 
-      // Edit inputs
       const titleInput = document.getElementById("title-edit");
       const authorInput = document.getElementById("author-edit");
       const yearInput = document.getElementById("year-edit");
@@ -264,7 +265,6 @@ function rakRakBukuRender(libraryArray) {
     });
   });
 }
-
 
 // Create new book
 
@@ -340,7 +340,6 @@ function filterBooks(libraryArray, key, keyType) {
 // App's initializations
 
 document.addEventListener("DOMContentLoaded", (event) => {
-  
   //Rak buku first render initialization
   rakRakBukuRender(library);
 
