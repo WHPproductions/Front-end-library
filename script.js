@@ -1,9 +1,9 @@
 class Book {
-  constructor(title, author, year, isComplete, id = +new Date()) {
+  constructor(title, author, year, isComplete, id = String(+new Date())) {
     this.id = id;
     this.title = title;
     this.author = author;
-    this.year = year;
+    this.year = typeof year === "string" ? Number(year) : year;
     this.isComplete = isComplete;
   }
 }
@@ -330,8 +330,10 @@ function toggleCompleteBook(libraryArray, localStorageKey, bookId) {
 function filterBooks(libraryArray, key, keyType) {
   if (key === "") return rakRakBukuRender(libraryArray);
 
+  const keyword = new RegExp(key, "i", "g");
+
   const filteredBooks = libraryArray.filter((book) => {
-    return book[keyType] == key;
+    return keyword.test(book[keyType]);
   });
 
   rakRakBukuRender(filteredBooks);
